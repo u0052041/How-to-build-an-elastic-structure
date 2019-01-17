@@ -93,16 +93,19 @@ This lab use [BeeswithMachineGuns](https://github.com/newsapps/beeswithmachinegu
 6. Go to tmp folder, clone **BeesWithMachineGuns** to Cloud 9
 
 ```cd /tmp```
+
 ```sudo git clone https://github.com/newsapps/beeswithmachineguns.git```
 
 7. Install BeesWithMachineGuns
 
 ```cd beeswithmachineguns/```
+
 ```sudo python setup.py install```
 
 8. Create .boto config
 
 ```cd /home/ec2-user/```
+
 ```nano .boto```
 
 9. Input information to .boto config
@@ -152,7 +155,7 @@ bees attack : conduct your bees to attack a target!
 -u : target location'
 
 
-2. Generate Bees using `bees up` command
+2. Generate Bees using Bees up command
 
 You can type some important part of command and leave others default, like:
 
@@ -169,7 +172,7 @@ You can find your AMI ID in here:
 
 3. Wait for Bees to load their machine guns, and type `bees report` to check their status.
 
-4. Test your Elastic Load Balancer or Web Server using `bees attack` command:
+4. Test your Elastic Load Balancer or Web Server using bees attack command:
 
 >**Notice again,to avoid unnecessary attack,do not try any other website!**
 

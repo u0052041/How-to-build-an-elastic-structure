@@ -10,7 +10,7 @@ The following procedures help you set up a scaled and load-balanced application,
 ## Prerequisites
 > The workshop’s region will be in ‘N.Virginia’
 
-> 準備vpc環境，如果沒有，可以透過[這個TEMPLate](檔案位置)去deploy
+> Prepare VPC, if there's no VPC's,you can use [lab-network](lab-network_yaml.yaml/) to deploy
 
 ## Lab tutorial
 ### Create Load Balancer and Target Group
@@ -30,8 +30,7 @@ This part will walk you to create an Application Load Balancer to distributes in
 
     * Name: `WebServerLB`
     * Scheme: choose **internet-facing**
-    * VPC: select **My Lab VPC**, click **us-east-1a** and **us-east-1b** 
-    // VPC 待修改
+    * VPC: select **My Lab VPC**, choose Subnet with **name** **Lab Public Subnet 1** and **Lab Public Subnet 2** 
 
 <p align="center">
     <img src="images/load_balancer_AZ.jpg" width="100%" height="100%">
@@ -87,6 +86,25 @@ This part will walk you to create an Application Load Balancer to distributes in
 
 It will take 20 ~ 40 minutes, do the following steps beside waiting.
 
+### Create a Security Group for Auto Scaling instances
+In different service, we create different security group to provide unfriendly request.Here is a security group for launch configuration.
+
+1. On the **Service** menu, click **EC2**.
+
+2. In the navigation pane, click **Security Groups**.
+
+3. Click **Create Security Group**.
+
+4. Enter the following information:
+
+    * Security group name : `WebServerLC_SG`
+    * VPC : `My Lab VPC`
+
+5. Under **Inbound** tag, click **Add Rule** and select **HTTP**.
+
+6. Click **Create**.
+
+
 ### Create Auto Scaling Group
 Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which create automatically.We can separate this step into two part:
 
@@ -94,21 +112,19 @@ Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which cre
 
 [Launch configuration](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html) is an instance configuration template that an Auto Scaling group uses to launch EC2 instances. When you create a launch configuration, you specify information for the instances. Include the ID of the Amazon Machine Image (AMI), the instance type, a key pair, one or more security groups, and a block device mapping. We're telling you how to set up the details about scaling instances.
 
-1. On the **service** menu, click **EC2**.
+1. In the navigation pane, click **Auto Scaling Groups**.
 
-2. In the navigation pane, click **Auto Scaling Groups**.
+2. Click **Create Auto Scaling group**.
 
-3. Click **Create Auto Scaling group**.
+3. Choose **Launch Configuration**, choose **Create a new launch configuration**, then click **Next Step**.
 
-4. Choose **Launch Configuration**, choose **Create a new launch configuration**, then click **Next Step**.
+4. In the navigation pane, choose **Quick Start**, in the row for the second **Amazon Linux AMI**, click **Select**.
 
-5. In the navigation pane, choose **Quick Start**, in the row for the second **Amazon Linux AMI**, click **Select**.
+5. Select instance type **t2.micro** and click **Next:Configure details**
 
-6. Select instance type **t2.micro** and click **Next:Configure details**
+6. In the Configure details, enter Name: `Auto-Scaling-Launch`
 
-7. In the Configure details, enter Name: `Auto-Scaling-Launch`
-
-8. Specify the following settings:
+7. Specify the following settings:
     * Purchasing option: select **Request Spot Instance**
     * Maximum price: **0.05**
     * User data: copy the following 
@@ -126,71 +142,68 @@ service httpd start
 
 > Because Spot Instance is cheaper than On-Demand instance, so we choose Spot Instance for Auto Scaling instances.
 
-9. Click **Next: Add Storage**
+8. Click **Next: Add Storage**
 
-10. Click **Next: Configure Security Group**
+9. Click **Next: Configure Security Group**
 
-11. Select **Create a new security group** name: **WebServerLC_SG**.
+10. Select **Select an existing security group** , choose `WebServerLC_SG` and click **Review**.
 
-12. Change **Type** to **HTTP**, which **Port Range** is **80**.
+11. Click **Review**.
 
-13. Click **Review**.
+12. Review the details of your launch configuration and click **Create launch configuration**.
 
-14. Review the details of your launch configuration and click **Create launch configuration**.
-
-15. Click **Proceed without a keypair**, select the acknowledgment box, and click **Create launch configuration**.
+13. Click **Proceed without a keypair**, select the acknowledgment box, and click **Create launch configuration**.
 
 #### Create Auto Scaling group
 
  [Auto Scaling](https://aws.amazon.com/autoscaling/?nc1=h_ls) monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost. Using AWS Auto Scaling, it’s easy to setup application scaling for multiple resources across multiple services in minutes.Scaling Policy can be customize in several ways.
 
-16. Click **Create an Auto Scaling group using this launch configuration** to create Auto Scaling group.
+14. Click **Create an Auto Scaling group using this launch configuration** to create Auto Scaling group.
 
-17. On the Create Auto Scaling Group, enter the following detail:
+15. On the Create Auto Scaling Group, enter the following detail:
 
     * Group name: `Auto-Scaling-Group`
     * Group size: Start with `1` instance
     * Network: select **My Lab VPC**
-    * Subnet: select both **us-east-1a** and **us-east-1b**
-//VPC 待修改
+    * Subnet: select both **Lab Public Subnet 1** and **Lab Public Subnet 2**
 
-18. Scroll down and expand **Advanced Details**, and select **Receive traffic from one or more load balancers**.
+16. Scroll down and expand **Advanced Details**, and select **Receive traffic from one or more load balancers**.
 
-19. Click in the **Target Groups** textbox and then click **WebServerTG**.
+17. Click in the **Target Groups** textbox and then click **WebServerTG**.
 
-20. Click **Next: Configure scaling policies**.
+18. Click **Next: Configure scaling policies**.
 
-21. Click **Use scaling policies to adjust the capacity of this group**.
+19. Click **Use scaling policies to adjust the capacity of this group**.
 
-22. Modify the **Scale between** textbox to scale between **1** and **5** instances.
+20. Modify the **Scale between** textbox to scale between **1** and **5** instances.
 
-23. Specify the following settings:
+21. Specify the following settings:
     * Name: **Scale Group Size**
     * Metric type: **Average CPU Utilization**
     * Target value: **70**
 
-24. Click **Next: Configure Notifications**.
+22. Click **Next: Configure Notifications**.
 
-25. Click **Next: Configure Tags**, enter the following details:
+23. Click **Next: Configure Tags**, enter the following details:
 
     * Key: **Name**
     * Value: **AutoScaling Instance**
 
-26. Click **Review**.
+24. Click **Review**.
 
-27. Review the details of your Auto Scaling group, then click **Create Auto Scaling group**.
+25. Review the details of your Auto Scaling group, then click **Create Auto Scaling group**.
 
-28. Click **Close** when your Auto Scaling has been created.
+26. Click **Close** when your Auto Scaling has been created.
 
-29. Select the Auto-Scaling Group just created.
+27. Select the Auto-Scaling Group just created.
 
-30. Click **Action**.
+28. Click **Action**.
 
-31. Click **Edit**
+29. Click **Edit**
 
-32. In the **Target Groups**, select **WebServerTG**.
+30. In the **Target Groups**, select **WebServerTG**.
 
-33. Click **Save**.
+31. Click **Save**.
 
 ### Test your website 
 
