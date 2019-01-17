@@ -1,4 +1,4 @@
-# Scaling-EC2-with-AutoScaling
+# How to build an elastic structure
 
 ## Scenario
 The following procedures help you set up a scaled and load-balanced application, you will attach a load balancer to your Auto Scaling group.The load balancer automatically distributes incoming traffic across the instances in the group.And a cloudfront generate by load balancer.This tutorial attaches a load balancer to an Auto Scaling group when you create the group, and set up a scaling policy to be triggered of target tracking scaling policy.
@@ -117,7 +117,7 @@ Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which cre
 # Install Apache Web Server and PHP 
 yum install -y php72 wget httpd24
 # Download Lab files 
-wget https://raw.githubusercontent.com/ecloudvalley/Auto-Scaling-EC2-with-Custom-Scaling-Policy/master/index.php
+wget https://raw.githubusercontent.com/ecloudvalley/How-to-build-an-elastic-structure/master/index.php
 mv index.php /var/www/html/
 # Turn on web server 
 chkconfig httpd on 
@@ -276,4 +276,4 @@ Congratulations! now you have learned:
 * Trigger Auto Scaling Group with Target Tracking Scaling Policy
 
 ## Appendix
-To test the Website and Elastic Load Balancer, you can try [BeeswithMachineGuns](http://github.com/ecloudballey/Scaling-EC2-with-AutoScaling/tree/master/Bees-with-Machine-Guns/README.md)
+To test the Website and Elastic Load Balancer, you can try [Bees-with-Machine-Guns](Bees-with-Machine-Guns/)

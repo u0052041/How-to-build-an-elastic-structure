@@ -1,4 +1,4 @@
-# Test-Auto-Scaling-EC2-with-BeeswithMachineGuns
+# Test Auto Scaling EC2 with BeeswithMachineGuns
 
 ## Scenario
 This lab use [BeeswithMachineGuns](https://github.com/newsapps/beeswithmachineguns/blob/master/README.textile) to test Auto Scaling EC2. You will create a Bee Server to manage little bees to attack an elastic load balancer.**Please do it carefully to avoid incorrect attack**.
