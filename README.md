@@ -40,9 +40,7 @@ This part will walk you to create an Application Load Balancer to distributes in
 
 7. Click **Next: Configure Security Groups**.
 
-8. Select **Create a new security group** name: **WebServerLB_SG**.
-
-9. Change **Type** to **HTTP**, which **Port Range** is **80**.
+8. Select **Select an existing security group**, choose `ALB SG`.
 
 10. Click **Next: Configure Routing**.
 
@@ -86,25 +84,6 @@ This part will walk you to create an Application Load Balancer to distributes in
 
 It will take 20 ~ 40 minutes, do the following steps beside waiting.
 
-### Create a Security Group for Auto Scaling instances
-In different service, we create different security group to provide unfriendly request.Here is a security group for launch configuration.
-
-1. On the **Service** menu, click **EC2**.
-
-2. In the navigation pane, click **Security Groups**.
-
-3. Click **Create Security Group**.
-
-4. Enter the following information:
-
-    * Security group name : `WebServerLC_SG`
-    * VPC : `My Lab VPC`
-
-5. Under **Inbound** tag, click **Add Rule** and select **HTTP**.
-
-6. Click **Create**.
-
-
 ### Create Auto Scaling Group
 Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which create automatically.We can separate this step into two part:
 
@@ -146,7 +125,7 @@ service httpd start
 
 9. Click **Next: Configure Security Group**
 
-10. Select **Select an existing security group** , choose `WebServerLC_SG` and click **Review**.
+10. Select **Select an existing security group** , choose `Web SG`.
 
 11. Click **Review**.
 

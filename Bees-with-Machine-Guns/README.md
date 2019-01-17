@@ -162,6 +162,7 @@ You can type some important part of command and leave others default, like:
 ```bees up -s 2 -k MyAmazonKeypair```
 
 But we suggest the complete command:
+
 ```bees up -s 2 -k MyAmazonKeypair -z us-east-1a -g BeeServerSG -l ec2-user -i ami-xxxxxxxx -t t2.micro```
 
 You can find your AMI ID in here:
