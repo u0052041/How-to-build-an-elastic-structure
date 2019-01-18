@@ -42,20 +42,24 @@ This part will walk you to create an Application Load Balancer to distributes in
 
 8. Select **Select an existing security group**, choose `ALB SG`.
 
-10. Click **Next: Configure Routing**.
+<p align="center">
+    <img src="images/load_balancer_SG.jpg" width="100%" height="100%">
+</p>
 
-11. Enter the following information, and leave other as default:
+9. Click **Next: Configure Routing**.
+
+10. Enter the following information, and leave other as default:
 
     * Name: `WebServerTG`
 
-12. Click **Next: Register Targets**.
+11. Click **Next: Register Targets**.
     > Because there's no EC2 yet, we'll regist it later.
 
-13. Click **Next:Review**.
+12. Click **Next:Review**.
 
-14. Click **Create**.
+13. Click **Create**.
 
-15. Click **Close**.
+14. Click **Close**.
 
 ### Create a CloudFront using Load Balancer
 
@@ -91,19 +95,21 @@ Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which cre
 
 [Launch configuration](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html) is an instance configuration template that an Auto Scaling group uses to launch EC2 instances. When you create a launch configuration, you specify information for the instances. Include the ID of the Amazon Machine Image (AMI), the instance type, a key pair, one or more security groups, and a block device mapping. We're telling you how to set up the details about scaling instances.
 
-1. In the navigation pane, click **Auto Scaling Groups**.
+1. On the **service** menu, click **EC2**.
 
-2. Click **Create Auto Scaling group**.
+2. In the navigation pane, click **Auto Scaling Groups**.
 
-3. Choose **Launch Configuration**, choose **Create a new launch configuration**, then click **Next Step**.
+3. Click **Create Auto Scaling group**.
 
-4. In the navigation pane, choose **Quick Start**, in the row for the second **Amazon Linux AMI**, click **Select**.
+4. Choose **Launch Configuration**, choose **Create a new launch configuration**, then click **Next Step**.
 
-5. Select instance type **t2.micro** and click **Next:Configure details**
+5. In the navigation pane, choose **Quick Start**, in the row for the second **Amazon Linux AMI**, click **Select**.
 
-6. In the Configure details, enter Name: `Auto-Scaling-Launch`
+6. Select instance type **t2.micro** and click **Next:Configure details**
 
-7. Specify the following settings:
+7. In the Configure details, enter Name: `Auto-Scaling-Launch`
+
+8. Specify the following settings:
     * Purchasing option: select **Request Spot Instance**
     * Maximum price: **0.05**
     * User data: copy the following 
@@ -121,23 +127,21 @@ service httpd start
 
 > Because Spot Instance is cheaper than On-Demand instance, so we choose Spot Instance for Auto Scaling instances.
 
-8. Click **Next: Add Storage**
+9. Click **Next: Add Storage**
 
-9. Click **Next: Configure Security Group**
+10. Click **Next: Configure Security Group**
 
-10. Select **Select an existing security group** , choose `Web SG`.
+11. Select **Select an existing security group** , choose `Web SG`.
 
-11. Click **Review**.
+12. Click **Review**.
 
-12. Review the details of your launch configuration and click **Create launch configuration**.
+13. Review the details of your launch configuration and click **Create launch configuration**.
 
-13. Click **Proceed without a keypair**, select the acknowledgment box, and click **Create launch configuration**.
+14. Click **Proceed without a keypair**, select the acknowledgment box, and click **Create launch configuration**.
 
 #### Create Auto Scaling group
 
  [Auto Scaling](https://aws.amazon.com/autoscaling/?nc1=h_ls) monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost. Using AWS Auto Scaling, it’s easy to setup application scaling for multiple resources across multiple services in minutes.Scaling Policy can be customize in several ways.
-
-14. Click **Create an Auto Scaling group using this launch configuration** to create Auto Scaling group.
 
 15. On the Create Auto Scaling Group, enter the following detail:
 
@@ -173,16 +177,6 @@ service httpd start
 25. Review the details of your Auto Scaling group, then click **Create Auto Scaling group**.
 
 26. Click **Close** when your Auto Scaling has been created.
-
-27. Select the Auto-Scaling Group just created.
-
-28. Click **Action**.
-
-29. Click **Edit**
-
-30. In the **Target Groups**, select **WebServerTG**.
-
-31. Click **Save**.
 
 ### Test your website 
 
