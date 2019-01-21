@@ -1,7 +1,7 @@
 # How to build an elastic structure
 
 ## Scenario
-The following procedures help you set up a scaled and load-balanced application, you will attach a load balancer to your Auto Scaling group.The load balancer automatically distributes incoming traffic across the instances in the group.And a cloudfront generate by load balancer.This tutorial attaches a load balancer to an Auto Scaling group when you create the group, and set up a scaling policy to be triggered of target tracking scaling policy.
+The following procedures help you set up a scaled and load-balanced application, you will attach a load balancer to your Auto Scaling group. The load balancer automatically distributes incoming traffic across the instances in the group. And a CloudFront generates by Load balancer. This tutorial attaches a load balancer to an Auto Scaling group when you create the group, and set up a scaling policy to be triggered of target tracking scaling policy.
 
 <p align="center">
     <img src="images/architect.png" width="70%" height="70%">
@@ -19,11 +19,11 @@ The following procedures help you set up a scaled and load-balanced application,
 This part will walk you to create an Application Load Balancer to distributes incoming application traffic to EC2. 
 
 1. On the **service** menu, click **EC2**.
-	
+    
 2. In the navigation pane, click **Load Balancers**.
-	
+    
 3. Click **Create Load Balancer**.
-	
+    
 4. Choose **Application Load Balancer**, and click **Create**.
 
 5. Specify the following settings:
@@ -53,7 +53,7 @@ This part will walk you to create an Application Load Balancer to distributes in
     * Name: `WebServerTG`
 
 11. Click **Next: Register Targets**.
-    > Because there's no EC2 yet, we'll regist it later.
+    > Because there's no EC2 yet, we'll register it later.
 
 12. Click **Next:Review**.
 
@@ -63,7 +63,7 @@ This part will walk you to create an Application Load Balancer to distributes in
 
 ### Create a CloudFront using Load Balancer
 
-[CloudFront](https://aws.amazon.com/cloudfront/?nc1=h_ls) is a fast content delivery network (CDN),it will securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds.Cloudfront will also give our Elastic Load Balancer new domain name.The ELB we use in this case is the one we created in first step.
+[CloudFront](https://aws.amazon.com/cloudfront/?nc1=h_ls) is a fast content delivery network (CDN), it will securely deliver data, videos, applications, and APIs to customers globally with low latency, high transfer speeds. Cloudfront will also give our Elastic Load Balancer new domain name. The ELB we use in this case is the one we created in the first step.
 
 1. On the **Service** menu, choose **CloudFront**.
 
@@ -84,12 +84,12 @@ This part will walk you to create an Application Load Balancer to distributes in
     <img src="images/create_distribution_part2.jpg" width="70%" height="70%">
 </p>
 
-5. Choose **Create Distribution** to deploy cloudfront distribution.
+5. Choose **Create Distribution** to deploy CloudFront distribution.
 
 It will take 20 ~ 40 minutes, do the following steps beside waiting.
 
 ### Create Auto Scaling Group
-Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which create automatically.We can separate this step into two part:
+Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which create automatically. We can separate this step into two part:
 
 #### Create Launch Configuration
 
@@ -141,7 +141,7 @@ service httpd start
 
 #### Create Auto Scaling group
 
- [Auto Scaling](https://aws.amazon.com/autoscaling/?nc1=h_ls) monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost. Using AWS Auto Scaling, it’s easy to setup application scaling for multiple resources across multiple services in minutes.Scaling Policy can be customize in several ways.
+ [Auto Scaling](https://aws.amazon.com/autoscaling/?nc1=h_ls) monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost. Using AWS Auto Scaling, it’s easy to setup application scaling for multiple resources across multiple services in minutes. Scaling Policy can be customized in several ways.
 
 15. On the Create Auto Scaling Group, enter the following detail:
 
@@ -180,10 +180,10 @@ service httpd start
 
 ### Test your website 
 
-The CloudFront created before must successfully been deploy now, we can test it to see if it works like expectation.
+The CloudFront created before must successfully deploy now, we can test it to see if it works like expectation.
 
 #### ALB
-In the ALB Website, the web page will changed since refresh the browser. There's no cache in ALB.
+In the ALB Website, the web page will be changed since refresh the browser. There's no cache in ALB.
 1. In the navigation pane, click **Load Balancer**.
 
 2. Check the **Description** tag bellow, copy **DNS name** and paste it to the browser.
@@ -194,7 +194,7 @@ Now you can see the **Port**, **Public IP**,**Instance ID** and **Time** shown o
 
 #### Cloudfront
 
-In the Cloudfront Website, cache can be cutomized. Reducing the duration allows you to serve dynamic content. Increasing the duration means your users get better performance.
+In the Cloudfront Website, cache can be customized. Reducing the duration allows you to serve dynamic content. Increasing the duration means your users get better performance.
 
 1. Click On the **Service** menu, click **CloudFront**.
 
@@ -206,7 +206,7 @@ In the Cloudfront Website, cache can be cutomized. Reducing the duration allows 
 
 4. Press **F5** to refresh the page, click the file under **Name**
 
-5. View the **X-Cache**,now you will see **Hit from cloudfront**
+5. View the **X-Cache**, now you will see **Hit from CloudFront**
 
 <p align="center">
     <img src="images/cloudfront_cache.jpg" width="100%" height="100%">
@@ -219,13 +219,13 @@ Make sure to clean up the service we just created.
 
     1. On the **Service** menu, Click **Cloudfront**.
 
-    2. Select the cloudfront with **Origin name** `WebServerLB`
+    2. Select the CloudFront with **Origin name** `WebServerLB`
 
     3. Click **Disable**
 
     > Wait until the **state** become **Disabled**
 
-    4. Select the same cloudfront and click **Delete** on the top
+    4. Select the same CloudFront and click **Delete** on the top
 
 * WebServer Instance
 
@@ -239,7 +239,7 @@ Make sure to clean up the service we just created.
 
     2. Right click on **Auto Scaling Launch** and choose **Delete launch configuration**.
 
-    3. In the navigtion pane, choose **Auto Scaling Groups**.
+    3. In the navigation pane, choose **Auto Scaling Groups**.
 
     4. Right click on **Auto-Scaling-Group** and choose **Delete**.
 
