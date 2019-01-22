@@ -132,6 +132,10 @@ ec2_region_endpoint=us-east-1.ec2.amazonaws.com
 
 > **Notice** that we used to put Access Key ID and Secret Access Key ID in .boto before. Since we add IAM role, we don't need it anymore.
 
+10. Press **Ctrl** + **X** to exit.
+
+11. Press **Y** to save modify and press **Enter** to leave.
+
 ### Generate Bee instances and test a target
 
 1. Enter the right location to generate Bees
