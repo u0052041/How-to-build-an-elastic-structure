@@ -8,7 +8,7 @@ This lab use [BeeswithMachineGuns](https://github.com/newsapps/beeswithmachinegu
 
 >Prepare a [Web Server instance](https://github.com/ecloudvalley/Launch-an-Amazon-EC2-in-LAMP-Environment)
 
->Prepare an [Auto Scaling group with Elatic Load Balance](https://github.com/ecloudvalley/Auto-Scaling-EC2-with-Custom-Scaling-Policy)
+>Prepare an [Auto Scaling group with Elastic Load Balance](https://github.com/ecloudvalley/Auto-Scaling-EC2-with-Custom-Scaling-Policy)
 
 ## Lab tutorial
 ### Create Security Groups for Bees
@@ -27,15 +27,23 @@ This lab use [BeeswithMachineGuns](https://github.com/newsapps/beeswithmachinegu
 
 5. Create Inbound rules:
 
-    * Type : `HTTP`, Port Range: `80` 
-    * Type : `SSH`, Port Range: `22` 
+    * Type : `HTTP`, Port Range: `80`, Source: `0.0.0.0/0`
+    * Type : `SSH`, Port Range: `22`, Source: `0.0.0.0/0`
 
 <p align="center">
-    <img src="images/create_security_group.jpg" width="100%" height="100%">
+    <img src="images/create_security_group.jpg" width="70%" height="70%">
 </p>
 
-### Create an Cloud 9 instance in Amazon Web Service
-[AWS Cloud9](https://aws.amazon.com/cloud9/) is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal.Since your Cloud9 IDE is cloud-based, you can work on your projects from your office, home, or anywhere using an internet-connected machine.We're going to use Cloud 9 as BeeServer to set up bee instances.
+### Create a Keypair for bees
+
+1. In the navigation pane, click **Key Pairs**.
+
+2. Click **Create Key Pair**.
+
+3. Enter a name and click **Create**, it will download to your computer.
+
+### Create a Cloud 9 instance in Amazon Web Service
+[AWS Cloud9](https://aws.amazon.com/cloud9/) is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Since your Cloud9 IDE is cloud-based, you can work on your projects from your office, home, or anywhere using an internet-connected machine. We're going to use Cloud 9 as BeeServer to set up bee instances.
 
 1. On the **service** menu, click **Cloud 9**.
 
@@ -45,7 +53,7 @@ This lab use [BeeswithMachineGuns](https://github.com/newsapps/beeswithmachinegu
 
 4. In **environment settings**, leave everything as default and click **Next step**.
 
-> Because we just need a easy lab, the default setting will satisfiy our demand.
+> Because we just need an easy lab, the default setting will satisfy our demand.
 
 5. Review the name and settings, and click **Create environment**.
 
@@ -63,7 +71,7 @@ This lab use [BeeswithMachineGuns](https://github.com/newsapps/beeswithmachinegu
 4. Change **Credential** to **off**.
 
 <p align="center">
-    <img src="images/cloud9_credential.jpg" width="100%" height="100%">
+    <img src="images/cloud9_credential.jpg" width="70%" height="70%">
 </p>
 
 5. On the **Service** menu, click **EC2**.
@@ -82,7 +90,7 @@ This lab use [BeeswithMachineGuns](https://github.com/newsapps/beeswithmachinegu
 
 >**Notice** that Cloud 9 is base on Linux system, make sure to upload **Keypair.pem** not **.ppk**
 
-4. Move our keypair to the right location, look at the bottom of Cloud 9 and input:
+4. Move your keypair to the right location, look at the bottom of Cloud 9 and input:
 
 ```sudo mv MyAmazonKeypair.pem /home/ec2-user/.ssh```
 
@@ -122,7 +130,7 @@ ec2_region_endpoint=us-east-1.ec2.amazonaws.com
 #elb_region_endpoint=elasticloadbalancing.us-east-1.amazonaws.com
 ```
 
-> **Notice** that we used to put Acccess Key ID and Secret Access Key ID in .boto before. Since we add IAM role, we don't need it anymore.
+> **Notice** that we used to put Access Key ID and Secret Access Key ID in .boto before. Since we add IAM role, we don't need it anymore.
 
 ### Generate Bee instances and test a target
 
@@ -157,7 +165,7 @@ bees attack : conduct your bees to attack a target!
 
 2. Generate Bees using Bees up command
 
-You can type some important part of command and leave others default, like:
+You can type some important part of the command and leave others default, like:
 
 ```bees up -s 2 -k MyAmazonKeypair```
 
@@ -168,20 +176,38 @@ But we suggest the complete command:
 You can find your AMI ID in here:
 
 <p align="center">
-    <img src="images/AMI.jpg" width="100%" height="100%">
+    <img src="images/AMI.jpg" width="50%" height="50%">
 </p>
 
 3. Wait for Bees to load their machine guns, and type `bees report` to check their status.
 
+<p align="center">
+    <img src="images/bees_up.jpg" width="70%" height="70%">
+</p>
+
+<p align="center">
+    <img src="images/bees_report.jpg" width="30%" height="30%">
+</p>
+
 4. Test your Elastic Load Balancer or Web Server using bees attack command:
 
->**Notice again,to avoid unnecessary attack,do not try any other website!**
+>**Notice again, to avoid the unnecessary attack, do not try any other website!**
 
-
+Test ELB:
 ```bees attack -n 1000 -c 2 -k MyAmazonKeypair -u http://WebServerLB-XXXXXXXXX.us-east-1.elb.amazonaws.com/```
 
+Test WebServer:
+```bees attack -n 1000 -c 2 -k MyAmazonKeypair -u http://XX.XX.XX.XX```
+
+<p align="center">
+    <img src="images/bees_attack.jpg" width="70%" height="70%">
+</p>
 
 5. While Finished, use `bees down` to clean up all bees.
+
+<p align="center">
+    <img src="images/bees_down.jpg" width="30%" height="30%">
+</p>
 
 ### Clean up
 
