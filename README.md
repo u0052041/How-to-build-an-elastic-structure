@@ -103,7 +103,7 @@ Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which cre
 
 4. Choose **Launch Configuration**, choose **Create a new launch configuration**, then click **Next Step**.
 
-5. In the navigation pane, choose **Quick Start**, in the row for the second **Amazon Linux AMI**, click **Select**.
+5. In the navigation pane, choose **Quick Start**, in the row for the second **Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type**, click **Select**.
 
 6. Select instance type **t2.micro** and click **Next:Configure details**
 

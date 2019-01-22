@@ -176,17 +176,17 @@ But we suggest the complete command:
 You can find your AMI ID in here:
 
 <p align="center">
-    <img src="images/AMI.jpg" width="50%" height="50%">
+    <img src="images/AMI.jpg" width="70%" height="70%">
 </p>
 
 3. Wait for Bees to load their machine guns, and type `bees report` to check their status.
 
 <p align="center">
-    <img src="images/bees_up.jpg" width="70%" height="70%">
+    <img src="images/bees_up.jpg" width="100%" height="100%">
 </p>
 
 <p align="center">
-    <img src="images/bees_report.jpg" width="30%" height="30%">
+    <img src="images/bees_report.jpg" width="50%" height="50%">
 </p>
 
 4. Test your Elastic Load Balancer or Web Server using bees attack command:
@@ -200,13 +200,13 @@ Test WebServer:
 ```bees attack -n 1000 -c 2 -k MyAmazonKeypair -u http://XX.XX.XX.XX```
 
 <p align="center">
-    <img src="images/bees_attack.jpg" width="70%" height="70%">
+    <img src="images/bees_attack.jpg" width="100%" height="100%">
 </p>
 
 5. While Finished, use `bees down` to clean up all bees.
 
 <p align="center">
-    <img src="images/bees_down.jpg" width="30%" height="30%">
+    <img src="images/bees_down.jpg" width="50%" height="50%">
 </p>
 
 ### Clean up
