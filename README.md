@@ -112,7 +112,8 @@ Create a Launch Configuration and Auto-Scaling Group to manage the EC2 which cre
 8. Specify the following settings:
     * Purchasing option: select **Request Spot Instance**
     * Maximum price: **0.05**
-    * User data: copy the following 
+    * User data: copy the following
+    * IP Address Type: **Assign a public IP address to every instance** 
 ```
 #!/bin/bash
 # Install Apache Web Server and PHP 

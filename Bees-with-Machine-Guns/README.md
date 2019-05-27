@@ -169,6 +169,10 @@ bees attack : conduct your bees to attack a target!
 
 2. Generate Bees using Bees up command
 
+> Notice 1: Change "MyAmazonKeypair" to your keypair name.
+
+> Notice 2: You should setup your bees in the same AZ as your bee server.
+
 You can type some important part of the command and leave others default, like:
 
 ```bees up -s 2 -k MyAmazonKeypair```
@@ -194,6 +198,8 @@ You can find your AMI ID in here:
 </p>
 
 4. Test your Elastic Load Balancer or Web Server using bees attack command:
+
+> Notice: you can change the attack count if you want.
 
 >**Notice again, to avoid the unnecessary attack, do not try any other website!**
 
